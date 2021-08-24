@@ -1,0 +1,38 @@
+version: "3.9"
+services:
+  db:
+    #build: .
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Test@12345
+      - MSSQL_PID=Developer
+      - MSSQL_TCP_PORT=1433 
+    ports:
+      - "1433:1433"
+  splunk-otel-collector:
+    image: quay.io/signalfx/splunk-otel-collector:latest
+    environment:
+      - SPLUNK_ACCESS_TOKEN=XXXXXX
+      - SPLUNK_REALM=us1
+      - SPLUNK_API_URL=https://api.${SPLUNK_REALM}.signalfx.com
+      - SPLUNK_BUNDLE_DIR=/usr/lib/splunk-otel-collector/agent-bundle
+      - SPLUNK_COLLECTD_DIR=/usr/lib/splunk-otel-collector/agent-bundle/run/collectd
+      - SPLUNK_HEC_TOKEN=${SPLUNK_ACCESS_TOKEN}
+      - SPLUNK_HEC_URL=https://ingest.${SPLUNK_REALM}.signalfx.com/v1/log
+      - SPLUNK_INGEST_URL=https://ingest.${SPLUNK_REALM}.signalfx.com
+      - SPLUNK_TRACE_URL=https://ingest.us0.signalfx.com/v2/trace
+      - SPLUNK_CONFIG=/config/sqlserver.yaml
+    volumes:
+      - ./config:/config
+    ports:
+      - "13133:13133"
+      - "14250:14250"
+      - "14268:14268"
+      - "4317:4317"
+      - "6060:6060"
+      - "7276:7276"
+      - "8888:8888"
+      - "9080:9080"
+      - "9411:9411"
+      - "9943:9943"

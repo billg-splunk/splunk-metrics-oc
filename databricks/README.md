@@ -11,3 +11,4 @@ This is a work in progress.
 ## Steps
 * Edit ```.env``` and add your token
 * Run ```./_start.sh```
+  * You need to run this from this databricks directory

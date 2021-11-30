@@ -60,12 +60,20 @@ receivers:
   zipkin:
     endpoint: 0.0.0.0:9411
 
-  smartagent/spark:
+  smartagent/spark-master:
     type: collectd/spark
     clusterType: Standalone
     isMaster: yes
     host: spark
     port: 8080
+
+  smartagent/spark-worker:
+    type: collectd/spark
+    clusterType: Standalone
+    isMaster: no
+    host: spark-worker
+    port: 8081
+
 
 processors:
   batch:
@@ -121,7 +129,7 @@ service:
       #- resource/add_environment
       exporters: [sapm, signalfx]
     metrics:
-      receivers: [otlp, signalfx, smartagent/spark]
+      receivers: [otlp, signalfx, smartagent/spark-master, smartagent/spark-worker]
       processors: [memory_limiter, batch]
       exporters: [signalfx]
     metrics/internal:

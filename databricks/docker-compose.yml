@@ -1,0 +1,46 @@
+version: "3"
+services:
+  spark:
+    image: docker.io/bitnami/spark:3
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+      - SPARK_HISTORY_OPTS=spark.ui.prometheus.enabled=true
+      - SPARK_METRICS_ENABLED=true
+      - SPARK_UI_PROMETHEUS_ENABLED=true
+    ports:
+      - '8080:8080'
+  spark-worker:
+    image: docker.io/bitnami/spark:3
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark:7077
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_CORES=1
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+  splunk-otel-collector:
+    image: quay.io/signalfx/splunk-otel-collector:latest
+    environment:
+      - SPLUNK_ACCESS_TOKEN=${SPLUNK_ACCESS_TOKEN}
+      - SPLUNK_REALM=${SPLUNK_REALM}
+      - SPLUNK_CONFIG=${SPLUNK_CONFIG}
+    ports:
+      - "13133:13133"
+      - "14250:14250"
+      - "14268:14268"
+      - "4317:4317"
+      - "6060:6060"
+      - "8888:8888"
+      - "9080:9080"
+      - "9411:9411"
+      - "9943:9943"
+    volumes:
+      - ${PWD}/databricks_config.yml:/etc/otel/collector/databricks_config.yml
+    depends_on:
+      - spark

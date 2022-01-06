@@ -44,7 +44,7 @@ services:
       - "9411:9411"
       - "9943:9943"
     volumes:
-      - ${PWD}/databricks_config.yml:/etc/otel/collector/databricks_config.yml
+      - ${PWD}/spark_config.yml:/etc/otel/collector/spark_config.yml
     depends_on:
       - spark
       - spark-worker

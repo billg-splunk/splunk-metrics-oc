@@ -1,5 +1,5 @@
-# databricks
-Example of running databricks and using Apache Spark to pull metrics with the OTel Collector.
+# Spark
+Example of running Apache Spark to pull metrics with the OTel Collector.
 
 This is a work in progress.
 

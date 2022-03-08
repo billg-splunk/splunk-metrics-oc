@@ -36,7 +36,7 @@ services:
       - "9411:9411"
       - "9943:9943"
     volumes:
-      - ${PWD}/spark_config.yml:/etc/otel/collector/spark_config.yml
+      - ${PWD}/kafka_config.yml:/etc/otel/collector/kafka_config.yml
     depends_on:
       - kafka
 volumes:

@@ -38,8 +38,7 @@ services:
     volumes:
       - ${PWD}/spark_config.yml:/etc/otel/collector/spark_config.yml
     depends_on:
-      - spark
-      - spark-worker
+      - kafka
 volumes:
   zookeeper_data:
     driver: local

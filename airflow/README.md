@@ -48,3 +48,5 @@ You can find other metrics of type: statsd:
 
 ![Find Statsd](img/find_statsd.png)
 
+## Notes
+In this example, the prefix ```airflow``` was stripped off of all the metrics. This is not required.

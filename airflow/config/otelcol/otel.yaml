@@ -21,6 +21,9 @@ receivers:
   smartagent/statsd:
     type: statsd
     metricPrefix: "airflow"
+    converters:
+      - pattern: "dag.{dag}.{instance}.duration"
+        metricName: "airflow.dag.instance.duration"
   jaeger:
     protocols:
       grpc:

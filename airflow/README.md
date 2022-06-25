@@ -28,7 +28,7 @@ docker-compose up
 ```
 
 ## Results
-You can find the GUI by going to http://localhost. The login is ```airflow```/```airflow```.
+You can find the GUI by going to http://localhost:8080. The login is ```airflow```/```airflow```.
 
 ![Airflow UI](img/airflow_ui.png)
 

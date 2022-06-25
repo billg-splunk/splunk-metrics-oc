@@ -44,6 +44,10 @@ You can see details of the runs by looking for the metrics:
 
 ![Splunk O11y Chart](img/splunk_chart.png)
 
+We added a converter to the configuration so the dag and the instance were created as dimensions instead:
+
+![Splunk O11y Chart](img/splunk_chart2.png)
+
 You can find other metrics of type: statsd:
 
 ![Find Statsd](img/find_statsd.png)

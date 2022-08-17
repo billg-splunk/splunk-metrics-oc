@@ -13,7 +13,7 @@ services:
   splunk-otel-collector:
     image: quay.io/signalfx/splunk-otel-collector:latest
     environment:
-      - SPLUNK_ACCESS_TOKEN=XXXXXX
+      - SPLUNK_ACCESS_TOKEN=${SPLUNK_ACCESS_TOKEN}
       - SPLUNK_REALM=us1
       - SPLUNK_API_URL=https://api.${SPLUNK_REALM}.signalfx.com
       - SPLUNK_BUNDLE_DIR=/usr/lib/splunk-otel-collector/agent-bundle
@@ -21,7 +21,7 @@ services:
       - SPLUNK_HEC_TOKEN=${SPLUNK_ACCESS_TOKEN}
       - SPLUNK_HEC_URL=https://ingest.${SPLUNK_REALM}.signalfx.com/v1/log
       - SPLUNK_INGEST_URL=https://ingest.${SPLUNK_REALM}.signalfx.com
-      - SPLUNK_TRACE_URL=https://ingest.us0.signalfx.com/v2/trace
+      - SPLUNK_TRACE_URL=https://ingest.${SPLUNK_REALM}.signalfx.com/v2/trace
       - SPLUNK_CONFIG=/config/sqlserver.yaml
     volumes:
       - ./config:/config

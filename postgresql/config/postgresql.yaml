@@ -39,6 +39,7 @@ receivers:
     host: db
     port: 5432
     connectionString: 'sslmode=disable user=postgres password=example'
+    extraMetrics: [ "*" ]
   fluentforward:
     endpoint: 127.0.0.1:8006
   hostmetrics:

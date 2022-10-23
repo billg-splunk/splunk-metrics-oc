@@ -5,8 +5,15 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: example
+    command: postgres -c shared_preload_libraries=pg_stat_statements -c pg_stat_statements.track=all -c max_connections=200
     ports:
       - "5432:5432"
+    volumes:
+      # copy the sql script to configure for the integration
+      - ./sql/01_configure_postgres.sh:/docker-entrypoint-initdb.d/01_configure_postgres.sh
+      # Use sample table and data from https://github.com/shabuhabs/javashop-otel/tree/workshop/db
+      - ./sql/02_create_table.sql:/docker-entrypoint-initdb.d/02_create_table.sql
+      - ./sql/03_fill_table.sql:/docker-entrypoint-initdb.d/03_fill_table.sql
   splunk-otel-collector:
     image: quay.io/signalfx/splunk-otel-collector:latest
     environment:

@@ -1,4 +1,4 @@
-# Spark
+# Kafka
 Example of running Apache Kafka to pull metrics with the OTel Collector.
 
 ## Prerequisites

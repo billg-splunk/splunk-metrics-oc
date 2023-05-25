@@ -1,0 +1,30 @@
+version: "3"
+services:
+  tomcat:
+    image: docker.io/bitnami/tomcat:10.1
+    ports:
+      - '8080:8080'
+      - '9999:9999'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - CATALINA_OPTS=-Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.rmi.port=9999 -Djava.rmi.server.hostname=tomcat
+  splunk-otel-collector:
+    image: quay.io/signalfx/splunk-otel-collector:latest
+    environment:
+      - SPLUNK_ACCESS_TOKEN=${SPLUNK_ACCESS_TOKEN}
+      - SPLUNK_REALM=${SPLUNK_REALM}
+      - SPLUNK_CONFIG=${SPLUNK_CONFIG}
+    ports:
+      - "13133:13133"
+      - "14250:14250"
+      - "14268:14268"
+      - "4317:4317"
+      - "6060:6060"
+      - "8888:8888"
+      - "9080:9080"
+      - "9411:9411"
+      - "9943:9943"
+    volumes:
+      - ${PWD}/tomcat_config.yaml:/etc/otel/collector/tomcat_config.yaml
+    depends_on:
+      - tomcat

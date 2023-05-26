@@ -1,6 +1,6 @@
 # Tomcat
 
-Example of running Apache Kafka to pull metrics with the OTel Collector.
+Example of running Apache Tomcat to pull metrics with the OTel Collector.
 
 # Prerequisites
 

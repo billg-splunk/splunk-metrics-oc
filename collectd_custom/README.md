@@ -6,6 +6,13 @@ See [documentation here](https://docs.splunk.com/Observability/gdi/collectd/coll
 
 This example will show configuring a probe to check multiple domains. It was initially created by Rich Young and enhanced for OTel by Achim Staebler.
 
+You may need to install parallel:
+```
+sudo apt install parallel
+```
+
+Also check permissions on the two files created (shell script and targets).
+
 ## OTel Config Snippet
 ```
 receivers:
@@ -62,7 +69,7 @@ done
 ## /usr/local/etc/ping-targets
 ```
 google.com
-splunk.com
+yahoo.com
 ```
 
 ## Result

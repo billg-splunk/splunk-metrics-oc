@@ -12,6 +12,7 @@ services:
       - "1433:1433"
   splunk-otel-collector:
     image: quay.io/signalfx/splunk-otel-collector:latest
+    depends_on: [db]
     environment:
       - SPLUNK_ACCESS_TOKEN=${SPLUNK_ACCESS_TOKEN}
       - SPLUNK_REALM=us1

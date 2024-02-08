@@ -40,7 +40,7 @@ docker exec -it $(docker ps | grep mssql-db | sed 's/^\([^ \t]*\)[ \t].*/\1/') "
 ```bash
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P Test@12345
 ```
-* And finally run these commands to create the database, table, and data. You may need to type GO and hit enter for each section.
+* And finally run these commands to create the database, table, and data. You may need to type `GO` and hit enter for each section.
 ```sql
 CREATE DATABASE MySample;
 GO
@@ -64,3 +64,11 @@ In this part we will add a processor so that each tag is a dimension. There are 
 
 Follow the same steps as part two but use `SPLUNK_CONFIG=/config/sqlserver3.yaml`.
 
+The result will now be that this metric has extracted the dimensions. The original metrics are still there but no longer being updated.
+
+![Custom-Metric-2](img/custom-metric-2.png)
+
+If we want we can also drop the original tags dimension.
+
+## Summary
+You can review the files and compare them with the [base configuration](https://raw.githubusercontent.com/signalfx/splunk-otel-collector/main/cmd/otelcol/config/collector/agent_config.yaml) to see what changes were made.

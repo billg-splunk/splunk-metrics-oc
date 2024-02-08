@@ -71,4 +71,9 @@ The result will now be that this metric has extracted the dimensions. The origin
 If we want we can also drop the original tags dimension.
 
 ## Summary
-You can review the files and compare them with the [base configuration](https://raw.githubusercontent.com/signalfx/splunk-otel-collector/main/cmd/otelcol/config/collector/agent_config.yaml) to see what changes were made.
+You can review the config files
+- [Part 1 = Basic SQL Collection](config/sqlserver.yaml)
+- [Part 2 = Part 1 + Collect Custom SQL Query](config/sqlserver2.yaml)
+- [Part 3 = Part 1 + Part 2 + Extract fields](config/sqlserver3.yaml)
+
+ and compare them with the [base configuration](https://raw.githubusercontent.com/signalfx/splunk-otel-collector/main/cmd/otelcol/config/collector/agent_config.yaml) to see what changes were made.

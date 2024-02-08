@@ -38,7 +38,7 @@ docker exec -it $(docker ps | grep mssql-db | sed 's/^\([^ \t]*\)[ \t].*/\1/') "
   * If for some reason that didn't work, simply run `docker exec -it <container-id> "bash"`
 * Inside the container, run the following at the bash prompt
 ```bash
- /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P Test@12345
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P Test@12345
 ```
 * And finally run these commands to create the database, table, and data. You may need to type GO and hit enter for each section.
 ```sql
@@ -55,4 +55,12 @@ INSERT INTO tblSample VALUES (1, 'banana', 5, 'type=fruit color=yellow');INSERT 
 GO
 ```
 
-The result should be that this metric now appears in the system, with name and tags as dimensions.
+The result should be that this metric now appears in the system, with name and tags as dimensions:
+![Custom-Metric-1](img/custom-metric-1.png)
+
+## Part 3: Adding a processor to split these tags
+
+In this part we will add a processor so that each tag is a dimension. There are many ways to do this but in this case we will simply parse the two tags we have (type and color).
+
+Follow the same steps as part two but use `SPLUNK_CONFIG=/config/sqlserver3.yaml`.
+

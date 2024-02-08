@@ -115,6 +115,11 @@ receivers:
     endpoint: "${SPLUNK_LISTEN_INTERFACE}:9411"
 
 processors:
+  attributes/extractions:
+    actions:
+    - key: tags
+      action: extract
+      pattern: "type=(?P<type>[^\\s]*) color=(?P<color>[^\\s]*)"
   batch:
   # Enabling the memory_limiter is strongly recommended for every pipeline.
   # Configuration is based on the amount of memory allocated to the collector.
@@ -203,7 +208,11 @@ service:
       - smartagent/signalfx-forwarder
       - smartagent/sqlserver
       - smartagent/sql
-      processors: [memory_limiter, batch, resourcedetection]
+      processors: 
+      - memory_limiter
+      - batch
+      - resourcedetection
+      - attributes/extractions
       exporters: [signalfx]
       # Use instead when sending to gateway
       #exporters: [otlp]

@@ -196,7 +196,7 @@ service:
       # Use instead when sending to gateway
       #exporters: [otlp, signalfx]
     metrics:
-      receivers: [hostmetrics, otlp, signalfx, smartagent/signalfx-forwarder, smartagent/sqlserver]
+      receivers: [hostmetrics, otlp, signalfx, smartagent/signalfx-forwarder, smartagent/sqlserver, smartagent/sql]
       processors: [memory_limiter, batch, resourcedetection]
       exporters: [signalfx]
       # Use instead when sending to gateway
